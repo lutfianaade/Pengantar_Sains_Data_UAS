@@ -1,0 +1,29 @@
+HASIL ANALISIS DATASET TELCO CUSTOMER CHURN
+============================================================
+
+Jumlah Baris : 7043
+Jumlah Kolom : 21
+
+STATISTIK DESKRIPTIF
+
+        customerID gender  SeniorCitizen Partner Dependents       tenure  ...        Contract PaperlessBilling     PaymentMethod MonthlyCharges TotalCharges Churn
+count         7043   7043    7043.000000    7043       7043  7043.000000  ...            7043             7043              7043    7043.000000  7043.000000  7043
+unique        7043      2            NaN       2          2          NaN  ...               3                2                 4            NaN          NaN     2
+top     7590-VHVEG   Male            NaN      No         No          NaN  ...  Month-to-month              Yes  Electronic check            NaN          NaN    No
+freq             1   3555            NaN    3641       4933          NaN  ...            3875             4171              2365            NaN          NaN  5174
+mean           NaN    NaN       0.162147     NaN        NaN    32.371149  ...             NaN              NaN               NaN      64.761692  2281.916928   NaN
+std            NaN    NaN       0.368612     NaN        NaN    24.559481  ...             NaN              NaN               NaN      30.090047  2265.270398   NaN
+min            NaN    NaN       0.000000     NaN        NaN     0.000000  ...             NaN              NaN               NaN      18.250000    18.800000   NaN
+25%            NaN    NaN       0.000000     NaN        NaN     9.000000  ...             NaN              NaN               NaN      35.500000   402.225000   NaN
+50%            NaN    NaN       0.000000     NaN        NaN    29.000000  ...             NaN              NaN               NaN      70.350000  1397.475000   NaN
+75%            NaN    NaN       0.000000     NaN        NaN    55.000000  ...             NaN              NaN               NaN      89.850000  3786.600000   NaN
+max            NaN    NaN       1.000000     NaN        NaN    72.000000  ...             NaN              NaN               NaN     118.750000  8684.800000   NaN
+
+[11 rows x 21 columns]
+
+JUMLAH PELANGGAN BERDASARKAN CHURN
+
+Churn
+No     5174
+Yes    1869
+Name: count, dtype: int64
