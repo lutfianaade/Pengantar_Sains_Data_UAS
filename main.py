@@ -5,8 +5,8 @@ from utils import (
     statistics_summary,
     save_summary_to_txt,
     bar_chart,
-    scatter_plot,
-    correlation_heatmap
+    boxplot,
+    histogram
 )
 
 
@@ -31,16 +31,17 @@ def main():
 
     # Visualisasi
     bar_chart(df)
-    scatter_plot(df)
-    correlation_heatmap(df)
+    boxplot(df)
+    histogram(df)
 
     print("\n" + "=" * 60)
     print("SEMUA PROSES BERHASIL DIJALANKAN")
     print("Output yang dihasilkan:")
     print("- hasil_analisis.txt")
     print("- grafik_bar_churn.png")
-    print("- grafik_scatter.png")
-    print("- grafik_heatmap.png")
+    print("- grafik_bar_contract.png")
+    print("- grafik_boxplot.png")
+    print("- grafik_histogram.png")
     print("=" * 60)
 
 

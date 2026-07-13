@@ -1,5 +1,4 @@
 import pandas as pd 
-import numpy as np 
 import matplotlib.pyplot as plt
 
 def load_data(file_path):
@@ -9,9 +8,9 @@ def load_data(file_path):
 
     df = pd.read_csv(file_path)
 
-    print("=" * 60)
+    print("=" * 30)
     print("DATASET BERHASIL DIMUAT")
-    print("=" * 60)
+    print("=" * 30)
 
     print("\n5 Data Pertama")
     print(df.head())
@@ -24,9 +23,9 @@ def check_data(df):
     Menampilkan informasi dataset.
     """
 
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 30)
     print("INFORMASI DATASET")
-    print("=" * 60)
+    print("=" * 30)
 
     print(df.info())
 
@@ -35,11 +34,9 @@ def check_data(df):
     print(f"Jumlah Kolom  : {df.shape[1]}")
 
     print("\nMissing Value")
-
     print(df.isnull().sum())
 
     print("\nJumlah Data Duplikat")
-
     print(df.duplicated().sum())
 
 def clean_data(df):
@@ -49,6 +46,8 @@ def clean_data(df):
 
     # Mengganti spasi kosong menjadi NaN
     df["TotalCharges"] = df["TotalCharges"].replace(" ", pd.NA)
+
+    print(df.isnull().sum())
 
     # Mengubah TotalCharges menjadi numerik
     df["TotalCharges"] = pd.to_numeric(
@@ -71,9 +70,9 @@ def statistics_summary(df):
     Menampilkan statistik dasar.
     """
 
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 30)
     print("STATISTIK DATA")
-    print("=" * 60)
+    print("=" * 30)
 
     print(df.describe())
 
@@ -127,83 +126,73 @@ def bar_chart(df):
 
     churn = df["Churn"].value_counts()
 
-    plt.figure(figsize=(6,5))
+    plt.figure(figsize=(7,5))
 
     plt.bar(
         churn.index,
-        churn.values
+        churn.values,
+        color=["steelblue", "tomato"]
     )
 
-    plt.title("Jumlah Pelanggan Churn")
+    plt.title("Jumlah Pelanggan Churn", fontsize=14)
     plt.xlabel("Status Churn")
     plt.ylabel("Jumlah Pelanggan")
 
     plt.tight_layout()
-
     plt.savefig("grafik_bar_churn.png")
-
     plt.show()
 
-def scatter_plot(df):
-    """
-    Scatter Plot antara Tenure dan Monthly Charges.
-    """
+def bar_chart(df):
+    contract = df["Contract"].value_counts()
 
-    plt.figure(figsize=(8,6))
+    plt.figure(figsize=(7,5))
 
-    plt.scatter(
-        df["tenure"],
-        df["MonthlyCharges"],
-        alpha=0.4,      # membuat titik transparan
-        s=15            # ukuran titik lebih kecil
+    plt.bar(contract.index, contract.values)
+
+    plt.title("Jumlah Pelanggan Berdasarkan Jenis Kontrak")
+    plt.xlabel("Jenis Kontrak")
+    plt.ylabel("Jumlah Pelanggan")
+
+    plt.tight_layout()
+    plt.savefig("grafik_bar_contract.png")
+    plt.show()
+
+def boxplot(df):
+    """Membuat Boxplot MonthlyCharges berdasarkan Churn"""
+    plt.figure(figsize=(7,5))
+
+    plt.boxplot(
+    [
+        df[df["Churn"]=="No"]["MonthlyCharges"],
+        df[df["Churn"]=="Yes"]["MonthlyCharges"]
+    ],
+    tick_labels=["No","Yes"] 
     )
-
-    plt.title("Hubungan Tenure dengan Monthly Charges")
-
-    plt.xlabel("Tenure (Bulan)")
-
+    
+    plt.title("Monthly Charges Berdasarkan Churn")
+    plt.xlabel("Status Churn")
     plt.ylabel("Monthly Charges")
 
-    plt.grid(True)
-
     plt.tight_layout()
 
-    plt.savefig("grafik_scatter.png")
-
+    plt.savefig("grafik_boxplot.png")
     plt.show()
 
-def correlation_heatmap(df):
-    """
-    Membuat Heatmap Korelasi.
-    """
+def histogram(df):
 
-    corr = df.corr(numeric_only=True)
+    plt.figure(figsize=(8,5))
 
-    plt.figure(figsize=(12,8))
-
-    plt.imshow(
-        corr,
-        cmap="coolwarm",
-        interpolation="nearest"
+    plt.hist(
+        df["MonthlyCharges"],
+        bins=15,
+        edgecolor="white"
     )
 
-    plt.colorbar()
+    plt.title("Distribusi Monthly Charges")
+    plt.xlabel("Monthly Charges")
+    plt.ylabel("Jumlah Pelanggan")
 
-    plt.xticks(
-        range(len(corr.columns)),
-        corr.columns,
-        rotation=90
-    )
-
-    plt.yticks(
-        range(len(corr.columns)),
-        corr.columns
-    )
-
-    plt.title("Heatmap Korelasi")
-
+    plt.grid(axis="y", linestyle="--", alpha=0.5)
     plt.tight_layout()
-
-    plt.savefig("grafik_heatmap.png")
-
+    plt.savefig("grafik_histogram.png")
     plt.show()
